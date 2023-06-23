@@ -85,10 +85,8 @@ const updateUser = (req, res, next) => {
     { name, email },
     { new: true, runValidators: true },
   )
+    .orFail()
     .then((user) => {
-      if (!user) {
-        throw NotFoundError('Пользователь не найден');
-      }
       res.status(HTTP_STATUS_OK).send({ data: user });
     })
     .catch((err) => handleError(err, next));

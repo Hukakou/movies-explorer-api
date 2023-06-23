@@ -7,7 +7,9 @@ const {
 } = require('../constants/constants');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  const currentUserId = req.user._id;
+
+  Movie.find({ owner: currentUserId })
     .then((movies) => res.status(HTTP_STATUS_OK).send(movies))
     .catch(next);
 };
