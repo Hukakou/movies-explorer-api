@@ -1,11 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const helmet = require('helmet');
-const auth = require('./middlewares/auth');
 const router = require('./routes/router');
 const catchErrorsMiddleware = require('./middlewares/catchErrors');
 const { apiRateLimiter } = require('./middlewares/rateLimiter');
@@ -20,7 +18,6 @@ app.use(apiRateLimiter);
 app.use(express.json());
 app.use(requestLogger);
 app.use(router);
-app.use(auth);
 app.use(errorLogger);
 app.use(errors());
 app.use(catchErrorsMiddleware);
